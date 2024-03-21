@@ -130,6 +130,12 @@
   <data name="Deleted" xml:space="preserve">
     <value>تم الحذف بنجاح</value>
   </data>
+  <data name="EmailExit" xml:space="preserve">
+    <value>هذا  الايميل موجود بالفعل</value>
+  </data>
+  <data name="FaildToAddUser" xml:space="preserve">
+    <value>فشلت اضافه هذا المستخدم</value>
+  </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>لا يمكنك ترك هذه الخانه فارغه</value>
   </data>
@@ -139,10 +145,17 @@
   <data name="NotNull" xml:space="preserve">
     <value>لايمكن ان تكون هذه الخانه فاررغه</value>
   </data>
+  <data name="PasswordNotMatched" xml:space="preserve">
+    <value>كلمه المرور لا تتوافق مع كلمه المرور التاكديه</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value> انت غير مصرح لك</value>
+  </data>
+  <data name="UserNameExist" xml:space="preserve">
+    <value>اسم المستخدم هذا موجود بالفعل</value>
+    <comment>ا</comment>
   </data>
 </root>

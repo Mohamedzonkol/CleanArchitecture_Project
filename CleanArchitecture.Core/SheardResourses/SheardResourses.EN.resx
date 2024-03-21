@@ -129,6 +129,12 @@
   <data name="Deleted" xml:space="preserve">
     <value>Deleted Successfully</value>
   </data>
+  <data name="EmailExit" xml:space="preserve">
+    <value>This Email Is Alerady Exist</value>
+  </data>
+  <data name="FaildToAddUser" xml:space="preserve">
+    <value> I Can Not Add This User</value>
+  </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>Name Must be Not Empty</value>
   </data>
@@ -138,10 +144,16 @@
   <data name="NotNull" xml:space="preserve">
     <value>Name Must be Not Null</value>
   </data>
+  <data name="PasswordNotMatched" xml:space="preserve">
+    <value>password and confirm password does not matched</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>This Faild Is Required</value>
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value>UnAuthorized</value>
+  </data>
+  <data name="UserNameExist" xml:space="preserve">
+    <value>This User Name Is Already Exist</value>
   </data>
 </root>
