@@ -1,0 +1,16 @@
+﻿namespace CleanArchitecture.Core.SheardResourses
+{
+    public static class SheardResoursesKeys
+    {
+        public const string Required = "Required";
+        public const string NotFound = "NotFound";
+        public const string Created = "Created";
+        public const string UnAuthorized = "UnAuthorized";
+        public const string Deleted = "Deleted";
+        public const string Added = "Added";
+        public const string BadRequest = "BadRequest";
+        public const string NotEmpty = "NotEmpty";
+        public const string NotNull = "NotNull";
+
+    }
+}
