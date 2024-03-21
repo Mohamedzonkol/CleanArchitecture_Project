@@ -11,6 +11,11 @@
         public const string BadRequest = "BadRequest";
         public const string NotEmpty = "NotEmpty";
         public const string NotNull = "NotNull";
+        public const string PasswordNotMatched = "PasswordNotMatched";
+        public const string EmailExit = "EmailExit";
+        public const string UserNameExist = "UserNameExist";
+        public const string FaildToAddUser = "FaildToAddUser";
+
 
     }
 }
