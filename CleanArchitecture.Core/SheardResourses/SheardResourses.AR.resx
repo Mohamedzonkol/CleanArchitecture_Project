@@ -145,6 +145,9 @@
   <data name="NotNull" xml:space="preserve">
     <value>لايمكن ان تكون هذه الخانه فاررغه</value>
   </data>
+  <data name="PasswordChangedSuccessfuly" xml:space="preserve">
+    <value>تم تغيير الباسورد بنجاح</value>
+  </data>
   <data name="PasswordNotMatched" xml:space="preserve">
     <value>كلمه المرور لا تتوافق مع كلمه المرور التاكديه</value>
   </data>

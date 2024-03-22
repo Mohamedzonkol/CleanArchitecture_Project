@@ -39,5 +39,11 @@ namespace CleanArchitecture.Api.Controllers
             var response = await mediator.Send(new DeleteUserCommand(id));
             return NewResult(response);
         }
+        [HttpPut("ChangePassword")]
+        public async Task<IActionResult> ChangeUserPassword([FromBody] ChangeUserPasswordCommand command)
+        {
+            var response = await mediator.Send(command);
+            return NewResult(response);
+        }
     }
 }

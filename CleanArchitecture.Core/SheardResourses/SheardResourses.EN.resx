@@ -144,6 +144,9 @@
   <data name="NotNull" xml:space="preserve">
     <value>Name Must be Not Null</value>
   </data>
+  <data name="PasswordChangedSuccessfuly" xml:space="preserve">
+    <value>Change Password Done Successfully</value>
+  </data>
   <data name="PasswordNotMatched" xml:space="preserve">
     <value>password and confirm password does not matched</value>
   </data>
