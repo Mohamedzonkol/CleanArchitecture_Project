@@ -7,6 +7,8 @@ namespace CleanArchitecture.Core.Mapping.Users
         public UsersProfile()
         {
             AddUsersCommandMapping();
+            GetUserQueryMapping();
+            GetUserByIdMapping();
         }
     }
 }
