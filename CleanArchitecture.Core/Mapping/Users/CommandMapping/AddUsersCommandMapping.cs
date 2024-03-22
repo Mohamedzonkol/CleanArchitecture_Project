@@ -7,11 +7,11 @@ namespace CleanArchitecture.Core.Mapping.Users
     {
         public void AddUsersCommandMapping()
         {
-            CreateMap<AddUsersCommand, ApplicationUser>()
-                .ForMember(des => des.UserName, ops => ops.MapFrom(
-                    src => src.UserName))
-                .ForMember(des => des.PhoneNumber, ops => ops.MapFrom(
-                    src => src.PhoneNumber));
+            CreateMap<AddUsersCommand, ApplicationUser>();
+            //.ForMember(des => des.UserName, ops => ops.MapFrom(
+            //    src => src.UserName))
+            //.ForMember(des => des.PhoneNumber, ops => ops.MapFrom(
+            //    src => src.PhoneNumber));
         }
     }
 }

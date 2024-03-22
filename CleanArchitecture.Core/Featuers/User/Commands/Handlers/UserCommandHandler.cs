@@ -9,7 +9,7 @@ using Microsoft.Extensions.Localization;
 
 namespace CleanArchitecture.Core.Featuers.Students.Commands.Handlers
 {
-    public class AddUsersHandler(IMapper mapper, UserManager<ApplicationUser> userManager
+    public class UserCommandHandler(IMapper mapper, UserManager<ApplicationUser> userManager
         , IStringLocalizer<SheardResourses.SheardResourses> stringLocalizer)
         : ResponseHandler(stringLocalizer),
             IRequestHandler<AddUsersCommand, Response<string>>
