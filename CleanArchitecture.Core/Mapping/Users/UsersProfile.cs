@@ -9,6 +9,7 @@ namespace CleanArchitecture.Core.Mapping.Users
             AddUsersCommandMapping();
             GetUserQueryMapping();
             GetUserByIdMapping();
+            UpdateUserMapping();
         }
     }
 }

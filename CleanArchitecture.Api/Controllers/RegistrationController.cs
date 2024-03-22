@@ -22,10 +22,22 @@ namespace CleanArchitecture.Api.Controllers
             return Ok(response);
         }
         [HttpGet("GetUserById/{id}")]
-        public async Task<IActionResult> GetAllUsers([FromRoute] string id)
+        public async Task<IActionResult> GetUserById([FromRoute] string id)
         {
             var response = await mediator.Send(new GetUseByIdQuery(id));
             return Ok(response);
+        }
+        [HttpPut("EditUser")]
+        public async Task<IActionResult> Edit([FromBody] UpdateUserCommand command)
+        {
+            var response = await mediator.Send(command);
+            return NewResult(response);
+        }
+        [HttpDelete("DeleteUser/{id}")]
+        public async Task<IActionResult> Delete([FromRoute] string id)
+        {
+            var response = await mediator.Send(new DeleteUserCommand(id));
+            return NewResult(response);
         }
     }
 }
