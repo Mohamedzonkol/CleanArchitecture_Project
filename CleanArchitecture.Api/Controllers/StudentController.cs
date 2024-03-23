@@ -2,12 +2,13 @@
 using CleanArchitecture.Core.Featuers.Students.Commands.Models;
 using CleanArchitecture.Core.Featuers.Students.Queries.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class StudentController(IMediator mediator) : AppControllerBase
     {
         [HttpGet("StudentList")]
@@ -17,6 +18,7 @@ namespace CleanArchitecture.Api.Controllers
             return Ok(response);
         }
         [HttpGet("paginatedList")]
+        [AllowAnonymous]
         public async Task<IActionResult> Paginated([FromQuery] GetStudentPaginatedQuery query)
         {
             var response = await mediator.Send(query);

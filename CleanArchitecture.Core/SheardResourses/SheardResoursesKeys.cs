@@ -15,6 +15,9 @@
         public const string EmailExit = "EmailExit";
         public const string UserNameExist = "UserNameExist";
         public const string FaildToAddUser = "FaildToAddUser";
+        public const string UserName = "UserName";
+        public const string Password = "Password";
+        public const string PasswordNotCorrect = "PasswordNotCorrect";
 
 
     }

@@ -32,7 +32,7 @@ builder.Services.AddCors(options =>
 #region Depenancy Injection
 builder.Services.AddInfrastructreDependencies()
     .AddServicesDependencies().
-    AddCoreDependencies().AddResgistraionDependencies();
+    AddCoreDependencies().AddResgistraionDependencies(builder.Configuration);
 #endregion
 #region Locolization
 //builder.Services.AddControllersWithViews();
@@ -72,8 +72,8 @@ app.UseRequestLocalization(options.Value);
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
 app.UseCors("MyCors");
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
