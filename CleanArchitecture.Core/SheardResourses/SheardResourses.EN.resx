@@ -144,6 +144,12 @@
   <data name="NotNull" xml:space="preserve">
     <value>Name Must be Not Null</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordNotCorrect" xml:space="preserve">
+    <value>This Password is Not Correct</value>
+  </data>
   <data name="PasswordNotMatched" xml:space="preserve">
     <value>password and confirm password does not matched</value>
   </data>
@@ -152,6 +158,9 @@
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value>UnAuthorized</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
   </data>
   <data name="UserNameExist" xml:space="preserve">
     <value>This User Name Is Already Exist</value>
