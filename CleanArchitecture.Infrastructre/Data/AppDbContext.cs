@@ -22,6 +22,7 @@ namespace CleanArchitecture.Infrastructre.Data
         public DbSet<StudentSubject> StudentSubjects { get; set; }
         public DbSet<DepartmetSubject> DepartmetSubjects { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
