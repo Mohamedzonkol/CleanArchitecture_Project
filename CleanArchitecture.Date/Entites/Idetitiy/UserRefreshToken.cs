@@ -10,12 +10,14 @@ namespace CleanArchitecture.Date.Entites.Idetitiy
         //  [ForeignKey(nameof(User))] صح بردو
         public string UserId { get; set; }
         public string? JwtId { get; set; }
+        public string? Token { get; set; }
         public string? RefreshToken { get; set; }
         public bool IsUsed { get; set; }
         public bool IsExpired { get; set; }
         public DateTime AddedTime { get; set; }
         public DateTime ExpiryDate { get; set; }
         [ForeignKey("UserId")]
+        [InverseProperty("UserRefreshTokens")]
         public virtual ApplicationUser? User { get; set; }
     }
 }

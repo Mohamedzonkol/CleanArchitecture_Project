@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CleanArchitecture.Core.Bases;
+﻿using CleanArchitecture.Core.Bases;
 using CleanArchitecture.Core.Featuers.Authentication.Commands.Models;
 using CleanArchitecture.Core.SheardResourses;
 using CleanArchitecture.Date.Entites.Idetitiy;
@@ -11,10 +10,12 @@ using Microsoft.Extensions.Localization;
 
 namespace CleanArchitecture.Core.Featuers.Authentication.Commands.Handlers
 {
-    public class AuthenticationCommandHandler(IMapper mapper, UserManager<ApplicationUser> userManager
+    public class AuthenticationCommandHandler(UserManager<ApplicationUser> userManager
        , SignInManager<ApplicationUser> signInManager, IAuthenticationServices authenticationServices,
        IStringLocalizer<SheardResourses.SheardResourses> stringLocalizer)
-        : ResponseHandler(stringLocalizer), IRequestHandler<SignInCommand, Response<JwtAuthResult>>
+        : ResponseHandler(stringLocalizer),
+            IRequestHandler<SignInCommand, Response<JwtAuthResult>>,
+            IRequestHandler<RefreshTokenCommand, Response<JwtAuthResult>>
     {
         public async Task<Response<JwtAuthResult>> Handle(SignInCommand request, CancellationToken cancellationToken)
         {
@@ -24,10 +25,17 @@ namespace CleanArchitecture.Core.Featuers.Authentication.Commands.Handlers
             if (!SignInResult.Succeeded)
                 return BadRequest<JwtAuthResult>(stringLocalizer[SheardResoursesKeys.PasswordNotCorrect]);
             // Generate Token
-            var result = authenticationServices.GetJwtToken(user);
+            var result = await authenticationServices.GetJwtToken(user);
             return Success(result);
 
         }
 
+        public async Task<Response<JwtAuthResult>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+        {
+            var result = await authenticationServices.GetRefreshToken(request.AccessToken, request.RefreshToken);
+            return Success(result);
+        }
     }
+
+
 }

@@ -14,6 +14,7 @@ namespace CleanArchitecture.Infrastructre
             service.AddTransient<IDapartmentReporesatory, DepartmentReporesatory>();
             service.AddTransient<ISubjectReporesatory, SubjectReporesatory>();
             service.AddTransient<IInstructorReporesatory, InstructorReporesatory>();
+            service.AddTransient<IRefreshTokenReporesatory, RefreshTokenReporesatory>();
             service.AddTransient(typeof(IGenericRepo<>), typeof(GenericRepo<>));
             return service;
         }
