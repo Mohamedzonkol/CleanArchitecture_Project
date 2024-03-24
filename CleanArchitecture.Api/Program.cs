@@ -1,8 +1,11 @@
 using CleanArchitecture.Core;
 using CleanArchitecture.Core.MiddleWare;
+using CleanArchitecture.Date.Entites.Idetitiy;
 using CleanArchitecture.Infrastructre;
 using CleanArchitecture.Infrastructre.Data;
+using CleanArchitecture.Infrastructre.Seeder;
 using CleanArchitecture.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -57,6 +60,18 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 #endregion
 
 var app = builder.Build();
+
+#region Seeder
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    await RoleSeeder.SeedAsync(roleManager);
+    await UserSeeder.SeedAsync(userManager);
+}
+
+#endregion
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

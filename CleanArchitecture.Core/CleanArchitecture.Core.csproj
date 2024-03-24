@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Folder Include="Featuers\Authentication\Commands\Result\" />
+    <Folder Include="Featuers\Authorization\Querys\Models\" />
     <Folder Include="Featuers\Department\Command\" />
     <Folder Include="Mapping\Department\CommandMapping\" />
   </ItemGroup>

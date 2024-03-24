@@ -11,6 +11,7 @@ namespace CleanArchitecture.Services
             service.AddTransient<IStudentServices, StudentServices>();
             service.AddTransient<IDepartmentServices, DepartmentServices>();
             service.AddTransient<IAuthenticationServices, AuthenticationServices>();
+            service.AddTransient<IAuthorizationServices, AuthorizationServices>();
             return service;
         }
 
