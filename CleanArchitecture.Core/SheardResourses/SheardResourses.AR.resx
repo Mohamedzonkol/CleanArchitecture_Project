@@ -120,6 +120,9 @@
   <data name="Added" xml:space="preserve">
     <value>تم الاضافه بنجاح</value>
   </data>
+  <data name="AlgorithmsIsWrong" xml:space="preserve">
+    <value>هناك خطأ ف الخوارزميه المستخدمه</value>
+  </data>
   <data name="BadRequest" xml:space="preserve">
     <value>هناك شئ خاطئ</value>
   </data>
@@ -154,8 +157,20 @@
   <data name="PasswordNotMatched" xml:space="preserve">
     <value>كلمه المرور لا تتوافق مع كلمه المرور التاكديه</value>
   </data>
+  <data name="RefreshTokenIsExpired" xml:space="preserve">
+    <value>هذا التوكين قد تمت انتهاء صلاحيته</value>
+  </data>
+  <data name="RefreshTokenIsNotFound" xml:space="preserve">
+    <value>هذا التوكين لم يتم العثور عليه</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>العمليه تمت بنجاح</value>
+  </data>
+  <data name="TokenIsNotExpired" xml:space="preserve">
+    <value>هذا التوكين لم تنتهي صلاحيته بعد</value>
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value> انت غير مصرح لك</value>

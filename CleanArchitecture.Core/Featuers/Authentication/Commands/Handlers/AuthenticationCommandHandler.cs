@@ -32,7 +32,28 @@ namespace CleanArchitecture.Core.Featuers.Authentication.Commands.Handlers
 
         public async Task<Response<JwtAuthResult>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
         {
-            var result = await authenticationServices.GetRefreshToken(request.AccessToken, request.RefreshToken);
+            var jwtToken = authenticationServices.readJwt(request.AccessToken);
+            var (userId, expiryDate) =
+               await authenticationServices.ValidateTokenDetails(jwtToken, request.AccessToken, request.RefreshToken);
+            switch (userId)
+            {
+                case ("AlgorithmsIsWrong"):
+                    return Unauthorized<JwtAuthResult>(stringLocalizer[SheardResoursesKeys.AlgorithmsIsWrong]);
+                    break;
+                case ("TokenIsNotExpired"):
+                    return BadRequest<JwtAuthResult>(stringLocalizer[SheardResoursesKeys.TokenIsNotExpired]);
+                    break;
+                case ("RefreshTokenIsNotFound"):
+                    return NotFound<JwtAuthResult>(stringLocalizer[SheardResoursesKeys.RefreshTokenIsNotFound]);
+                    break;
+                case ("RefreshTokenIsExpired"):
+                    return Unauthorized<JwtAuthResult>(stringLocalizer[SheardResoursesKeys.RefreshTokenIsExpired]);
+                    break;
+            }
+            var user = await userManager.FindByIdAsync(userId);
+            if (user is null)
+                return NotFound<JwtAuthResult>();
+            var result = await authenticationServices.GetRefreshToken(user, request.RefreshToken, expiryDate, jwtToken);
             return Success(result);
         }
     }

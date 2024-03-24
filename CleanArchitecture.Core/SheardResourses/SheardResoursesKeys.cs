@@ -17,7 +17,12 @@
         public const string FaildToAddUser = "FaildToAddUser";
         public const string UserName = "UserName";
         public const string Password = "Password";
+        public const string Success = "Success";
         public const string PasswordNotCorrect = "PasswordNotCorrect";
+        public const string AlgorithmsIsWrong = "AlgorithmsIsWrong";
+        public const string TokenIsNotExpired = "TokenIsNotExpired";
+        public const string RefreshTokenIsNotFound = "RefreshTokenIsNotFound";
+        public const string RefreshTokenIsExpired = "RefreshTokenIsExpired";
 
 
     }
