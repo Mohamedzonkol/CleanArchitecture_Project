@@ -23,6 +23,7 @@ namespace CleanArchitecture.Infrastructre.Seeder
                 };
                 await userManager.CreateAsync(defaultUser, "Mo@123");
                 await userManager.AddToRoleAsync(defaultUser, "Admin");
+                await userManager.AddToRoleAsync(defaultUser, "User");
             }
         }
     }

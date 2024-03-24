@@ -42,7 +42,7 @@ namespace CleanArchitecture.Services.Services
 
         public async Task<string> EditAsync(Student student)
         {
-            await studentReporesatory.UpdateAsync(student);
+            await studentReporesatory.UpdateAsync(student).ConfigureAwait(false);
             return "Success";
         }
 
@@ -51,8 +51,8 @@ namespace CleanArchitecture.Services.Services
             var trands = studentReporesatory.BeginTransaction();
             try
             {
-                await studentReporesatory.DeleteAsync(student);
-                await trands.CommitAsync();
+                await studentReporesatory.DeleteAsync(student).ConfigureAwait(false);
+                await trands.CommitAsync().ConfigureAwait(false);
                 return "Success";
             }
             catch (Exception e)

@@ -20,7 +20,7 @@ namespace CleanArchitecture.Services.Services
 
         public async Task<JwtAuthResult> GetJwtToken(ApplicationUser user)
         {
-            var (JwtToken, accessToken) = generateJwtSecurityToken(user);
+            var (JwtToken, accessToken) = await generateJwtSecurityToken(user);
             RefreshToken refreshToken = GetRefreshToken(user.UserName);
             UserRefreshToken userRefreashToken = new UserRefreshToken
             {
@@ -66,7 +66,7 @@ namespace CleanArchitecture.Services.Services
             var user = await userManager.FindByIdAsync(userId).ConfigureAwait(false);
             if (user is null)
                 throw new SecurityTokenException("User Is Not Found");
-            var (jwtSecurityToken, newToken) = generateJwtSecurityToken(user);
+            var (jwtSecurityToken, newToken) = await generateJwtSecurityToken(user);
             var response = new JwtAuthResult();
             var refreshTokenResult = new RefreshToken();
             response.AccessToken = newToken;
@@ -102,12 +102,13 @@ namespace CleanArchitecture.Services.Services
                 return e.Message;
             }
         }
-        private (JwtSecurityToken, string) generateJwtSecurityToken(ApplicationUser user)
+        private async Task<(JwtSecurityToken, string)> generateJwtSecurityToken(ApplicationUser user)
         {
+            var claims = await getClaims(user);
             var jwtToken = new JwtSecurityToken(
                 jwtSettings.Issuer,
                 jwtSettings.Audience,
-                getClaims(user),
+                claims,
                 expires: DateTime.Now.AddDays(jwtSettings.AccessTokenExpireDate),
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)), SecurityAlgorithms.HmacSha256Signature));
             var accessToken = new JwtSecurityTokenHandler().WriteToken(jwtToken);
@@ -139,14 +140,23 @@ namespace CleanArchitecture.Services.Services
             randomNumberGenertor.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber);
         }
-        private List<Claim> getClaims(ApplicationUser user)
+        private async Task<List<Claim>> getClaims(ApplicationUser user)
         {
-            var claims = new List<Claim>
-            {  new Claim(nameof(UserClaims.UserId),user.Id),
-                new Claim(nameof(UserClaims.UserName),user.UserName),
-                new Claim(nameof(UserClaims.Email),user.Email ),
-                new Claim(nameof(UserClaims.PhoneNumber),user.PhoneNumber?? string.Empty),
+            var roles = await userManager.GetRolesAsync(user).ConfigureAwait(false);
+            var claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Name,user.UserName),
+                new Claim(ClaimTypes.NameIdentifier,user.UserName),
+                new Claim(ClaimTypes.Email,user.Email),
+                new Claim(nameof(UserClaims.PhoneNumber), user.PhoneNumber),
+                new Claim(nameof(UserClaims.UserId), user.Id)
             };
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+            var userClaims = await userManager.GetClaimsAsync(user).ConfigureAwait(false);
+            claims.AddRange(userClaims);
             return claims;
         }
     }
