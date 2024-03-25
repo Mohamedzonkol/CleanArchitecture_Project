@@ -7,12 +7,13 @@ using Microsoft.Extensions.Localization;
 
 namespace CleanArchitecture.Core.Featuers.Authorization.Commands.Handlers
 {
-    public class CommandHandlers(IAuthorizationServices authorizationServices,
+    public class RoleCommandHandlers(IAuthorizationServices authorizationServices,
         IStringLocalizer<SheardResourses.SheardResourses> stringLocalizer)
         : ResponseHandler(stringLocalizer),
             IRequestHandler<AddRoleCommand, Response<string>>,
             IRequestHandler<EditRoleCommand, Response<string>>,
-            IRequestHandler<DeleteRoleCommand, Response<string>>
+            IRequestHandler<DeleteRoleCommand, Response<string>>,
+            IRequestHandler<UpdateUserRole, Response<string>>
     {
         public async Task<Response<string>> Handle(AddRoleCommand request, CancellationToken cancellationToken)
         {
@@ -35,6 +36,18 @@ namespace CleanArchitecture.Core.Featuers.Authorization.Commands.Handlers
             else if (role == "Used")
                 return UnprocessableEntity<string>(stringLocalizer[SheardResoursesKeys.notAllowed]);
             return Success((string)stringLocalizer[SheardResoursesKeys.Deleted]);
+        }
+
+        public async Task<Response<string>> Handle(UpdateUserRole request, CancellationToken cancellationToken)
+        {
+            var result = await authorizationServices.UpdateUserRole(request);
+            switch (result)
+            {
+                case "NotFound": return NotFound<string>(stringLocalizer[SheardResoursesKeys.NotFound]);
+                case "Failed": return BadRequest<string>(stringLocalizer[SheardResoursesKeys.notAllowed]);
+                case "AddedFailed": return BadRequest<string>(stringLocalizer[SheardResoursesKeys.BadRequest]);
+            }
+            return Success<string>("");
         }
     }
 }

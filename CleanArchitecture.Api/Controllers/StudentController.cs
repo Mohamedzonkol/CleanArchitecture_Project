@@ -31,18 +31,21 @@ namespace CleanArchitecture.Api.Controllers
             return NewResult(response);
         }
         [HttpPost("Student/Create")]
+        [Authorize(policy: "CreateStudent")]
         public async Task<IActionResult> Create([FromBody] AddStudentCommand command)
         {
             var response = await mediator.Send(command);
             return NewResult(response);
         }
         [HttpPut("Student/Update")]
+        [Authorize(policy: "EditStudent")]
         public async Task<IActionResult> Edit([FromBody] EditStudentCommand command)
         {
             var response = await mediator.Send(command);
             return NewResult(response);
         }
         [HttpDelete("StudentDelete/{id}")]
+        [Authorize(policy: "DeleteStudent")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var response = await mediator.Send(new DeleteStudentCommand(id));
