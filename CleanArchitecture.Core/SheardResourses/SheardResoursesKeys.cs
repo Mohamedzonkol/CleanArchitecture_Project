@@ -18,6 +18,7 @@
         public const string UserName = "UserName";
         public const string Password = "Password";
         public const string PasswordNotCorrect = "PasswordNotCorrect";
+        public const string notAllowed = "notAllowed";
 
 
     }

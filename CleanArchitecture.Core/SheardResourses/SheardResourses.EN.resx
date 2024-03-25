@@ -135,6 +135,9 @@
   <data name="FaildToAddUser" xml:space="preserve">
     <value> I Can Not Add This User</value>
   </data>
+  <data name="notAllowed" xml:space="preserve">
+    <value>Now You Do not allow to  do this</value>
+  </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>Name Must be Not Empty</value>
   </data>

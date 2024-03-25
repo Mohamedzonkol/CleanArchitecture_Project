@@ -136,6 +136,9 @@
   <data name="FaildToAddUser" xml:space="preserve">
     <value>فشلت اضافه هذا المستخدم</value>
   </data>
+  <data name="notAllowed" xml:space="preserve">
+    <value>EN</value>
+  </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>لا يمكنك ترك هذه الخانه فارغه</value>
   </data>

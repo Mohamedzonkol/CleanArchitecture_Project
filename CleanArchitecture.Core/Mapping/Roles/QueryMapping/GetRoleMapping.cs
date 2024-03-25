@@ -1,15 +1,14 @@
 ﻿using CleanArchitecture.Core.Featuers.Authorization.Querys.Result;
 using Microsoft.AspNetCore.Identity;
 
-namespace CleanArchitecture.Core.Mapping.Student //Note That Must be The same name space in StudentProfile
-
+namespace CleanArchitecture.Core.Mapping.Roles
 {
-    public partial class StudentProfile
+    public partial class RoleProfile
     {
-        public void GetStudentByIdMapping()
+        public void GetRoleMapping()
         {
             CreateMap<IdentityRole, GetRolesListResponse>();
-
         }
     }
+
 }

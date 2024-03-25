@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CleanArchitecture.Date\CleanArchitecture.Date.csproj" />
     <ProjectReference Include="..\CleanArchitecture.Infrastructre\CleanArchitecture.Infrastructre.csproj" />
   </ItemGroup>
