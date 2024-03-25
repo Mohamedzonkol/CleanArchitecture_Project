@@ -23,6 +23,8 @@
   <ItemGroup>
     <Folder Include="Featuers\Authentication\Commands\Result\" />
     <Folder Include="Featuers\Department\Command\" />
+    <Folder Include="Featuers\Email\Query\Handlers\" />
+    <Folder Include="Featuers\Email\Query\Models\" />
     <Folder Include="Mapping\Department\CommandMapping\" />
   </ItemGroup>
 
