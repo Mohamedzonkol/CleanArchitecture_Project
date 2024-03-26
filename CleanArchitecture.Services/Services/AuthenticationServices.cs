@@ -1,6 +1,7 @@
 ﻿using CleanArchitecture.Date.Entites.Idetitiy;
 using CleanArchitecture.Date.Helpers;
 using CleanArchitecture.Infrastructre.Abstract;
+using CleanArchitecture.Infrastructre.Data;
 using CleanArchitecture.Services.Abstract;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,8 @@ using System.Text;
 
 namespace CleanArchitecture.Services.Services
 {
-    public class AuthenticationServices(JwtSettings jwtSettings, IRefreshTokenReporesatory refreshTokenReporesatory,
+    public class AuthenticationServices(JwtSettings jwtSettings, AppDbContext context, IEmailServices emailServices,
+        IRefreshTokenReporesatory refreshTokenReporesatory,
         UserManager<ApplicationUser> userManager) : IAuthenticationServices
     {
         private readonly ConcurrentDictionary<string, RefreshToken> _userRefreshTokens = new();
@@ -102,6 +104,68 @@ namespace CleanArchitecture.Services.Services
                 return e.Message;
             }
         }
+
+        public async Task<string> ConfirmEmail(string userId, string code)
+        {
+            var user = await userManager.FindByIdAsync(userId).ConfigureAwait(false);
+            var confirmation = await userManager.ConfirmEmailAsync(user, code);
+            if (!confirmation.Succeeded) return "Failed";
+            return "Success";
+        }
+
+        public async Task<string> SendCodeResetPassword(string Email)
+        {
+            var trans = await context.Database.BeginTransactionAsync().ConfigureAwait(false);
+            try
+            {
+                var user = await userManager.FindByEmailAsync(Email).ConfigureAwait(false);
+                if (user is null) return "NotFound";
+                Random generator = new();
+                string code = generator.Next(0, 1000000).ToString("D6");
+                user.Code = code;
+                IdentityResult update = await userManager.UpdateAsync(user).ConfigureAwait(false);
+                if (!update.Succeeded) return "FailedUpdate";
+                await emailServices.SendEmail(Email, $"Code For Reset Password : {code}", "Reset Password")
+                    .ConfigureAwait(false);
+                await trans.CommitAsync().ConfigureAwait(false);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                await trans.RollbackAsync().ConfigureAwait(false);
+                return "Failed";
+            }
+        }
+
+        public async Task<string> ResetPassword(string code, string email)
+        {
+            var user = await userManager.FindByEmailAsync(email).ConfigureAwait(false);
+            if (user is null) return "NotFound";
+            var userCode = user.Code;
+            if (userCode == code)
+                return "Success";
+            return "Failed";
+        }
+
+        public async Task<string> ForgetPassword(string password, string email)
+        {
+            var trans = await context.Database.BeginTransactionAsync().ConfigureAwait(false);
+            try
+            {
+                var user = await userManager.FindByEmailAsync(email).ConfigureAwait(false);
+                if (user is null) return "NotFound";
+                await userManager.RemovePasswordAsync(user).ConfigureAwait(false);
+                await userManager.AddPasswordAsync(user, password).ConfigureAwait(false);
+                await trans.CommitAsync().ConfigureAwait(false);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                await trans.RollbackAsync().ConfigureAwait(false);
+                return "Failed";
+            }
+        }
+
         private async Task<(JwtSecurityToken, string)> generateJwtSecurityToken(ApplicationUser user)
         {
             var claims = await getClaims(user);

@@ -55,9 +55,6 @@ namespace CleanArchitecture.Services.Services
 
         public async Task<bool> IsRoleNameExist(string roleName)
         {
-            //var role = await roleManager.FindByNameAsync(roleName).ConfigureAwait(false);
-            //if(role is null) return false;
-            //return true;
             return await roleManager.RoleExistsAsync(roleName).ConfigureAwait(false);
         }
 

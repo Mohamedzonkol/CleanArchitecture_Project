@@ -7,6 +7,9 @@ using CleanArchitecture.Infrastructre.Seeder;
 using CleanArchitecture.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Globalization;
@@ -31,6 +34,14 @@ builder.Services.AddCors(options =>
         policy.AllowAnyMethod();
         policy.AllowAnyOrigin();
     });
+});
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt => opt.TokenLifespan = TimeSpan.FromHours(10));
+builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+builder.Services.AddTransient<IUrlHelper>(x =>
+{
+    var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
+    var factory = x.GetRequiredService<IUrlHelperFactory>();
+    return factory.GetUrlHelper(actionContext);
 });
 #region Depenancy Injection
 builder.Services.AddInfrastructreDependencies()

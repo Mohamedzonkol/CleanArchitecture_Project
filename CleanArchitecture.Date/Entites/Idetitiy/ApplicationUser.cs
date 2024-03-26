@@ -12,6 +12,7 @@ namespace CleanArchitecture.Date.Entites.Idetitiy
         public string FullName { get; set; }
         public string? Address { get; set; }
         public string? Country { get; set; }
+        public string? Code { get; set; }
         [InverseProperty("User")]
         public ICollection<UserRefreshToken> UserRefreshTokens { get; set; }
     }
