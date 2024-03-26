@@ -22,6 +22,9 @@ namespace CleanArchitecture.Core.Featuers.Authentication.Commands.Handlers
             var user = await userManager.FindByNameAsync(request.UserName);
             if (user == null) return NotFound<JwtAuthResult>(stringLocalizer[SheardResoursesKeys.NotFound]);
             var SignInResult = await signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+            if (!user.EmailConfirmed)
+                return BadRequest<JwtAuthResult>(stringLocalizer[SheardResoursesKeys.EmailConfirmed]);
+
             if (!SignInResult.Succeeded)
                 return BadRequest<JwtAuthResult>(stringLocalizer[SheardResoursesKeys.PasswordNotCorrect]);
             // Generate Token

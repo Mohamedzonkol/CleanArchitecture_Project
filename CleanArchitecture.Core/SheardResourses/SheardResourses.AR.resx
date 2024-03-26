@@ -130,8 +130,14 @@
   <data name="Deleted" xml:space="preserve">
     <value>تم الحذف بنجاح</value>
   </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>هذا الايميل لم يتم تفعيله</value>
+  </data>
   <data name="EmailExit" xml:space="preserve">
     <value>هذا  الايميل موجود بالفعل</value>
+  </data>
+  <data name="FaildEmailConfirmed" xml:space="preserve">
+    <value>فشل تفعيل هذا الايميل</value>
   </data>
   <data name="FaildToAddUser" xml:space="preserve">
     <value>فشلت اضافه هذا المستخدم</value>
@@ -159,6 +165,9 @@
   </data>
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
+  </data>
+  <data name="SendEmailFailed" xml:space="preserve">
+    <value>فشل ارسال الايميل </value>
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value> انت غير مصرح لك</value>

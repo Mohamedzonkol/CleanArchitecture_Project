@@ -19,6 +19,9 @@
         public const string Password = "Password";
         public const string PasswordNotCorrect = "PasswordNotCorrect";
         public const string notAllowed = "notAllowed";
+        public const string EmailConfirmed = "EmailConfirmed";
+        public const string SendEmailFailed = "SendEmailFailed";
+        public const string FaildEmailConfirmed = "FaildEmailConfirmed";
 
 
     }

@@ -27,5 +27,12 @@ namespace CleanArchitecture.Api.Controllers
             var response = await mediator.Send(query);
             return NewResult(response);
         }
+        [HttpGet("ConfirmEmail")]
+
+        public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailQuery query)
+        {
+            var response = await mediator.Send(query);
+            return NewResult(response);
+        }
     }
 }

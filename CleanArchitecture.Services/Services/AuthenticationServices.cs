@@ -102,6 +102,15 @@ namespace CleanArchitecture.Services.Services
                 return e.Message;
             }
         }
+
+        public async Task<string> ConfirmEmail(string userId, string code)
+        {
+            var user = await userManager.FindByIdAsync(userId).ConfigureAwait(false);
+            var confirmation = await userManager.ConfirmEmailAsync(user, code);
+            if (!confirmation.Succeeded) return "Failed";
+            return "Success";
+        }
+
         private async Task<(JwtSecurityToken, string)> generateJwtSecurityToken(ApplicationUser user)
         {
             var claims = await getClaims(user);
