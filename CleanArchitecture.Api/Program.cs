@@ -34,7 +34,9 @@ builder.Services.AddCors(options =>
         policy.AllowAnyMethod();
         policy.AllowAnyOrigin();
     });
-}); builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+});
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt => opt.TokenLifespan = TimeSpan.FromHours(10));
+builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 builder.Services.AddTransient<IUrlHelper>(x =>
 {
     var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;

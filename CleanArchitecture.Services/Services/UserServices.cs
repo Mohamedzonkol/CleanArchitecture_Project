@@ -30,8 +30,7 @@ namespace CleanArchitecture.Services.Services
                 var httpAccessor = httpContextAccessor.HttpContext.Request;
                 var returnUrl = $"{httpAccessor.Scheme}://{httpAccessor.Host}{urlHelper.Action("ConfirmEmail", "Authentication", new { userId = appUser.Id, code = code })}";
                 var message = $"To Confirm Email Click Link: <a href='{returnUrl}'>Link Of Confirmation</a>";
-                //$"/Api/V1/Authentication/ConfirmEmail?userId={user.Id}&code={code}";
-                //message or body
+
                 await emailServices.SendEmail(appUser.Email, message, "ConFirm Email").ConfigureAwait(false);
 
                 await trans.CommitAsync().ConfigureAwait(false);

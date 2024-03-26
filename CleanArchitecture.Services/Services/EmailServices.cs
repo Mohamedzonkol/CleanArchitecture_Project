@@ -15,8 +15,8 @@ namespace CleanArchitecture.Services.Services
                 //sending the Message of passwordResetLink
                 using (var client = new SmtpClient())
                 {
-                    await client.ConnectAsync(emailSettings.Host, emailSettings.Port, true);
-                    client.Authenticate(emailSettings.FromEmail, emailSettings.Password);
+                    await client.ConnectAsync(emailSettings.Host, emailSettings.Port, true).ConfigureAwait(false);
+                    await client.AuthenticateAsync(emailSettings.FromEmail, emailSettings.Password).ConfigureAwait(false);
                     var bodybuilder = new BodyBuilder
                     {
                         HtmlBody = $"{Message}",
@@ -29,8 +29,8 @@ namespace CleanArchitecture.Services.Services
                     message.From.Add(new MailboxAddress("Future Team", emailSettings.FromEmail));
                     message.To.Add(new MailboxAddress("testing", email));
                     message.Subject = reason == null ? "No Submitted" : reason;
-                    await client.SendAsync(message);
-                    await client.DisconnectAsync(true);
+                    await client.SendAsync(message).ConfigureAwait(false);
+                    await client.DisconnectAsync(true).ConfigureAwait(false);
                 }
                 //end of sending email
                 return "Success";

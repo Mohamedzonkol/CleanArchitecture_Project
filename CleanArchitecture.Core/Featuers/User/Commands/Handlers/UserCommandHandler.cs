@@ -30,7 +30,7 @@ namespace CleanArchitecture.Core.Featuers.Students.Commands.Handlers
                 case "Success": return Success<string>("");
                 default: return BadRequest<string>(UserCreated);
             }
-            return Created("");
+
         }
     }
 }

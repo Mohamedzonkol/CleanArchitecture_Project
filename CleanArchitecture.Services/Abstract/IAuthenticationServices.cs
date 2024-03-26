@@ -9,5 +9,8 @@ namespace CleanArchitecture.Services.Abstract
         public Task<JwtAuthResult> GetRefreshToken(string AccessToken, string RefreshToken);
         public Task<string> ValidateToken(string AccessToken);
         public Task<string> ConfirmEmail(string userId, string code);
+        public Task<string> SendCodeResetPassword(string Email);
+        public Task<string> ResetPassword(string code, string email);
+        public Task<string> ForgetPassword(string password, string email);
     }
 }

@@ -34,5 +34,23 @@ namespace CleanArchitecture.Api.Controllers
             var response = await mediator.Send(query);
             return NewResult(response);
         }
+        [HttpPost("SendResetPasswordEmail")]
+        public async Task<IActionResult> SendResetPasswordEmail([FromForm] ResetPasswordCommand command)
+        {
+            var response = await mediator.Send(command);
+            return NewResult(response);
+        }
+        [HttpGet("ResetPassword")]
+        public async Task<IActionResult> ResetPassword([FromQuery] ResetPasswordQuery query)
+        {
+            var response = await mediator.Send(query);
+            return NewResult(response);
+        }
+        [HttpPost("ForgetPassword")]
+        public async Task<IActionResult> ForgetPassword([FromForm] ForgetPasswordCommand command)
+        {
+            var response = await mediator.Send(command);
+            return NewResult(response);
+        }
     }
 }

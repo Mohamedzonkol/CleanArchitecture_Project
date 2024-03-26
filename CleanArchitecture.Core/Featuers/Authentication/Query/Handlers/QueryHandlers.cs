@@ -11,7 +11,8 @@ namespace CleanArchitecture.Core.Featuers.Authentication.Query.Handlers
         IStringLocalizer<SheardResourses.SheardResourses> stringLocalizer)
         : ResponseHandler(stringLocalizer),
             IRequestHandler<AuthuorirzeQueryModel, Response<string>>,
-            IRequestHandler<ConfirmEmailQuery, Response<string>>
+            IRequestHandler<ConfirmEmailQuery, Response<string>>,
+            IRequestHandler<ResetPasswordQuery, Response<string>>
     {
         public async Task<Response<string>> Handle(AuthuorirzeQueryModel request, CancellationToken cancellationToken)
         {
@@ -25,6 +26,18 @@ namespace CleanArchitecture.Core.Featuers.Authentication.Query.Handlers
             var emailConfirm = await authenticationServices.ConfirmEmail(request.UserId, request.Code);
             if (emailConfirm == "Failed") return BadRequest<string>(stringLocalizer[SheardResoursesKeys.FaildEmailConfirmed]);
             return Success("Confirm Email Is Done");
+        }
+
+        public async Task<Response<string>> Handle(ResetPasswordQuery request, CancellationToken cancellationToken)
+        {
+            var result = await authenticationServices.ResetPassword(request.Code, request.Email);
+            switch (result)
+            {
+                case "NotFound": return NotFound<string>(stringLocalizer[SheardResoursesKeys.NotFound]);
+                case "Failed": return BadRequest<string>(stringLocalizer[SheardResoursesKeys.SendEmailFailed]);
+                case "Success": return Success<string>("");
+                default: return BadRequest<string>(result);
+            }
         }
     }
 }
