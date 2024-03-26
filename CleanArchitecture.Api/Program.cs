@@ -1,4 +1,5 @@
 using CleanArchitecture.Core;
+using CleanArchitecture.Core.Fillters;
 using CleanArchitecture.Core.MiddleWare;
 using CleanArchitecture.Date.Entites.Idetitiy;
 using CleanArchitecture.Infrastructre;
@@ -48,6 +49,8 @@ builder.Services.AddInfrastructreDependencies()
     .AddServicesDependencies().
     AddCoreDependencies().AddResgistraionDependencies(builder.Configuration);
 #endregion
+
+builder.Services.AddTransient<AuthFilters>();
 #region Locolization
 //builder.Services.AddControllersWithViews();
 builder.Services.AddLocalization(opt =>

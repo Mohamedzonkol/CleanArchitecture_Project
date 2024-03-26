@@ -1,6 +1,7 @@
 ﻿using CleanArchitecture.Api.Bases;
 using CleanArchitecture.Core.Featuers.Students.Commands.Models;
 using CleanArchitecture.Core.Featuers.Students.Queries.Models;
+using CleanArchitecture.Core.Fillters;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace CleanArchitecture.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class StudentController(IMediator mediator) : AppControllerBase
     {
         [HttpGet("StudentList")]
+        [Authorize(Roles = "User")]
+        [ServiceFilter(typeof(AuthFilters))]
         public async Task<IActionResult> GetStudents()
         {
             var response = await mediator.Send(new GetStudentListQuery());

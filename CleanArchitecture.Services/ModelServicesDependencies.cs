@@ -1,4 +1,6 @@
 ﻿using CleanArchitecture.Services.Abstract;
+using CleanArchitecture.Services.AuthServices.Abstract;
+using CleanArchitecture.Services.AuthServices.Implementation;
 using CleanArchitecture.Services.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +16,7 @@ namespace CleanArchitecture.Services
             service.AddTransient<IAuthorizationServices, AuthorizationServices>();
             service.AddTransient<IEmailServices, EmailServices>();
             service.AddTransient<IUserServices, UserServices>();
+            service.AddTransient<ICurrentUserServices, CurrentUserServices>();
             return service;
         }
 
