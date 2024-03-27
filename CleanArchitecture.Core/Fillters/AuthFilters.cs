@@ -19,10 +19,6 @@ namespace CleanArchitecture.Core.Fillters
                         StatusCode = 403
                     };
                 else await next();
-
-
-
-
             }
 
         }
