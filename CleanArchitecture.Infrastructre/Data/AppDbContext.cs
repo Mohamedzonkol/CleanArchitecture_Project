@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Date.Entites;
 using CleanArchitecture.Date.Entites.Idetitiy;
+using CleanArchitecture.Date.Entites.Views;
 using EntityFrameworkCore.EncryptColumn.Interfaces;
 using EntityFrameworkCore.EncryptColumn.Util;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -27,6 +28,8 @@ namespace CleanArchitecture.Infrastructre.Data
         public DbSet<DepartmetSubject> DepartmetSubjects { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
+        //Views
+        public DbSet<ViewDepartment> ViewDepartment { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

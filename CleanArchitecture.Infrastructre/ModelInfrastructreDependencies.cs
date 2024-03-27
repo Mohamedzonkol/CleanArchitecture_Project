@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Infrastructre.Abstract;
+﻿using CleanArchitecture.Date.Entites.Views;
+using CleanArchitecture.Infrastructre.Abstract;
 using CleanArchitecture.Infrastructre.Generics.Abstract;
 using CleanArchitecture.Infrastructre.Generics.Implementation;
 using CleanArchitecture.Infrastructre.Reporesiories;
@@ -16,6 +17,8 @@ namespace CleanArchitecture.Infrastructre
             service.AddTransient<IInstructorReporesatory, InstructorReporesatory>();
             service.AddTransient<IRefreshTokenReporesatory, RefreshTokenReporesatory>();
             service.AddTransient(typeof(IGenericRepo<>), typeof(GenericRepo<>));
+            service.AddTransient<IViewReporesatory<ViewDepartment>, ViewReporesatory>();
+            service.AddTransient<IDepartmentCountProcReporesotry, DepartmentCountProcReporesotry>();
             return service;
         }
     }

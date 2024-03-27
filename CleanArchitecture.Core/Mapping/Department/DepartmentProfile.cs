@@ -7,6 +7,8 @@ namespace CleanArchitecture.Core.Mapping.Department
         public DepartmentProfile()
         {
             GetDepaertmentQueryMapping();
+            GetDepartmentStudentMapping();
+            GetDepartmentStudentProcQueryMapping();
 
         }
     }
