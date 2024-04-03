@@ -19,6 +19,7 @@ namespace CleanArchitecture.Infrastructre
             service.AddTransient(typeof(IGenericRepo<>), typeof(GenericRepo<>));
             service.AddTransient<IViewReporesatory<ViewDepartment>, ViewReporesatory>();
             service.AddTransient<IDepartmentCountProcReporesotry, DepartmentCountProcReporesotry>();
+            service.AddTransient<IInstructorFunctionRepo, InstructorFunctionRepo>();
             return service;
         }
     }
